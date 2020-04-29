@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CardList from "./components/cardList";
+import Form from "./components/form";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.scss';
+
+class App extends React.Component {
+ state={
+           profiles:[],
+ };
+
+
+   addNewProfile = (profileData)=>{
+     this.setState(prevState => ({
+profiles:[...prevState.profiles,profileData]
+     }))
+   };
+
+    render() {
+        return (
+            <div className="App">
+                <div className="header">gh-profiles</div>
+                <Form onSubmit={this.addNewProfile}/>
+                <CardList profiles={this.state.profiles}/>
+            </div>
+        );
+    }
+
+
 }
 
 export default App;
